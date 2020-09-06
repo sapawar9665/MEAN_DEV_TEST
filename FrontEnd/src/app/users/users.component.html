@@ -1,0 +1,180 @@
+<!-- <form #userForm="ngForm" (ngSubmit)="onSave(userForm.value, true)">
+    <table border='1'>
+      <tr>
+        <td>First Name</td>
+        <td>
+          <input name="id" type="hidden" [(ngModel)]="id" />
+          <input name="firstName" type="text" required [(ngModel)]="firstName" required/>
+  
+        </td>
+      </tr>
+      <tr>
+        <td>Last Name</td>
+        <td>
+          <input name="id" type="hidden" [(ngModel)]="id" />
+          <input name="lastName" type="text" required [(ngModel)]="lastName" required/>
+  
+        </td>
+      </tr>
+      <tr>
+        <td>Email</td>
+        <td>
+          <input name="id" type="hidden" [(ngModel)]="id" />
+          <input name="email" type="text" required [(ngModel)]="email" required/>
+  
+        </td>
+      </tr>
+      <tr>
+        <td>Phone Number</td>
+        <td>
+          <input name="id" type="hidden" [(ngModel)]="id" />
+          <input name="phone" type="text" required [(ngModel)]="phone" required/>
+  
+        </td>
+  
+      </tr>
+  
+      <tr>
+        <td>address</td>
+        <td> <input name="address" required type="text" [(ngModel)]="address" required/></td>
+      </tr>
+      <tr>
+        <td>Profile Image upload</td>
+        <td >
+          <input id="file-input" #Image type="file" (change)="handleFileInput($event.target.files)" required/>
+        </td>
+      </tr>
+  
+      <tr>
+        <td colspan="2">
+          <input type="submit" value="{{valbutton}}" />
+         </td>
+      </tr>
+    </table>
+  </form>
+  
+  <table border='1'>
+  
+    <tr>
+      <td>Id</td>
+      <td>Name</td>
+      <td>Address</td>
+      <td>Edit</td>
+      <td>Delete</td>
+    </tr>
+    <tr *ngFor="let kk of Repdata;let ind = index">
+  
+      <td>{{ind + 1}}</td>
+      <td>{{kk.name}}</td>
+      <td>{{kk.address}}</td>
+      <td><a (click)="edit(kk)" style="color:blueviolet">Edit</a></td>
+      <td><a (click)="delete(kk._id)" style="color:blueviolet">Delete</a> </td>
+    </tr>
+  </table> -->
+
+  <button type="button" class="btn btn-outline-dark" (click)="open('',mymodal,'Save')">Add New User</button>
+
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="firstName">
+        <th mat-header-cell *matHeaderCellDef> First Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+      </ng-container>
+  
+      <!-- Weight Column -->
+      <ng-container matColumnDef="lastName">
+        <th mat-header-cell *matHeaderCellDef> Last Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+      </ng-container>
+  
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="phone">
+        <th mat-header-cell *matHeaderCellDef> Phone </th>
+        <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="address">
+        <th mat-header-cell *matHeaderCellDef> Address </th>
+        <td mat-cell *matCellDef="let element"> {{element.address}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Actoins </th>
+        <td mat-cell *matCellDef="let element"> <span (click)="openDetail(element)" style="cursor: pointer;">View</span>&nbsp;&nbsp;&nbsp;<span (click)="open(element,mymodal,'Update')" style="cursor: pointer;">Edit</span>&nbsp;&nbsp;&nbsp; <span (click)="delete(element)" style="cursor: pointer;">Delete</span> </td>
+       </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
+    </table>
+
+  </div>
+
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Bootstrap Modal</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    T<form #userForm="ngForm">
+        <table border='1'>
+          <tr>
+            <td>First Name</td>
+            <td>
+              <input name="id" type="hidden" [(ngModel)]="id" />
+              <input name="firstName" type="text" required [(ngModel)]="firstName" required/>
+      
+            </td>
+          </tr>
+          <tr>
+            <td>Last Name</td>
+            <td>
+              <input name="id" type="hidden" [(ngModel)]="id" />
+              <input name="lastName" type="text" required [(ngModel)]="lastName" required/>
+      
+            </td>
+          </tr>
+          <tr>
+            <td>Email</td>
+            <td>
+              <input name="id" type="hidden" [(ngModel)]="id" />
+              <input name="email" type="text" required [(ngModel)]="email" required/>
+      
+            </td>
+          </tr>
+          <tr>
+            <td>Phone Number</td>
+            <td>
+              <input name="id" type="hidden" [(ngModel)]="id" />
+              <input name="phone" type="text" required [(ngModel)]="phone" required/>
+      
+            </td>
+      
+          </tr>
+      
+          <tr>
+            <td>address</td>
+            <td> <input name="address" required type="text" [(ngModel)]="address" required/></td>
+          </tr>
+          <tr>
+            <td>Profile Image upload</td>
+            <td >
+              <input id="file-input" #Image type="file" (change)="handleFileInput($event.target.files)" required/>
+            </td>
+          </tr>
+        </table>
+      </form>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-outline-dark" (click)="modal.close('Save click'); onSave(userForm.value, true)">Ok</button>
+  </div>
+</ng-template>
